@@ -2,7 +2,8 @@ name: First workflow
 on: workflow_dispatch 
 jobs:
   first-job: 
-    runs-on: macos-latest
+    if: github.ref_name == 'zicky-eng-patch-1'
+    runs-on: ubuntu-latest
     steps:
       - name: Print greeting
         run: echo "Hello World!"
