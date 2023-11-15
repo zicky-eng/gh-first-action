@@ -18,9 +18,11 @@ jobs:
         run: |
           curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
 
-
-      # Runs a set of commands using the runners shell
-      - name: Run a multi-line script
+      - name: Download Pulumi
         run: |
-          echo Add other actions to build,
-          echo test, and deploy your project.
+          wget https://get.pulumi.com/releases/sdk/pulumi-v3.94.0-linux-x64.tar.gz
+      # Runs a set of commands using the runners shell
+      #- name: Run a multi-line script
+      #  run: |
+      #    echo Add other actions to build,
+      #    echo test, and deploy your project.
