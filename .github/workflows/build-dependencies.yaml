@@ -29,3 +29,4 @@ jobs:
           BUCKET: "testpulumibucket"
         run: |
           aws s3 cp --no-progress pulumi-v3.94.0-linux-x64.tar.gz s3://$BUCKET/
+          aws s3 cp --no-progress kubectl s3://$BUCKET/
