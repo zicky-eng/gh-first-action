@@ -1,4 +1,3 @@
-
 # This is a basic workflow to help you get started with Actions
 name: Build dependencies 
 
@@ -8,7 +7,7 @@ on: workflow_dispatch
 jobs:
   # This workflow contains a single job called "build"
   build:
-    #if: github.ref_name == 'zicky-eng-patch-1'
+   
     runs-on: ubuntu-latest
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
@@ -17,10 +16,12 @@ jobs:
       - name: Get kubectl file
         run: |
           curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
-
       - name: Download Pulumi
         run: |
           wget https://get.pulumi.com/releases/sdk/pulumi-v3.94.0-linux-x64.tar.gz
+      - name: Get Helm Binary
+        run: |
+          wget https://get.helm.sh/helm-v3.13.1-linux-amd64.tar.gz
       - name: Upload Pulumi dependency to S3
         env: 
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
@@ -30,3 +31,4 @@ jobs:
         run: |
           aws s3 cp --no-progress pulumi-v3.94.0-linux-x64.tar.gz s3://$BUCKET/
           aws s3 cp --no-progress kubectl s3://$BUCKET/
+          aws s3 cp --no-progress helm-v3.13.1-linux-amd64.tar.gz s3://$BUCKET/
